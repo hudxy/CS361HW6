@@ -1,0 +1,45 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Submit an Issue</h1>
+        <form action="/addissue" method="post">
+
+            <h3>Category:</h3>
+            <select name="category" required>
+              <option value="Roads">Roads</option>
+              <option value="Electricity">Electricity</option>
+              <option value="NaturalGas">Natural Gas</option>
+              <option value="CommunicationNetworks">Communication Networks</option>
+              <option value="Schools">Schools</option>
+              <option value="Airports">Airports</option>
+              <option value="Rail">Rail</option>
+              <option value="Water">Water</option>
+              <option value="Wastewater">Wastewater</option>
+              <option value="Parks">Parks</option>
+              <option value="Levees">Levees</option>
+              <option value="Dams">Dams</option>
+              <option value="Waterways">Waterways</option>
+              <option value="InlandPorts">Inland Ports</option>
+              <option value="SolidWaste">Solid Waste</option>
+              <option value="HazardousSolidWaste">Hazardous Solid Waste</option>
+            </select><br>
+            <h3>Urgency Level:</h3>
+            <select name="urgency" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select><br>
+            <h3>Location:</h3>
+            City: <input type="text" name="city"><br>
+            State: <input type="text" name="state"><br>
+            Zip Code: <input type="number" name="zipcode"><br>
+            <h3>Description:</h3>
+            <textarea rows="20" cols="50" name="description">
+            </textarea><br>
+            <input type="submit" value="Report">
+        </form>
+    </body>
+</html>

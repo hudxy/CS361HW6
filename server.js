@@ -18,13 +18,13 @@ const viewsPath = path.join(__dirname, '/templates');
 // Set up hbs and views location
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
-app.set('port', 3000);
+app.set('port', 8555);
 
 
-//Funtion that returns true if a valid session is not active. 
+//Funtion that returns true if a valid session is not active.
 function notloggedin(req){
 	return (!req.session.user);
-}	
+}
 
 //Home page-----------------------------------------------
 app.get('/',function(req,res,next){
@@ -33,17 +33,17 @@ app.get('/',function(req,res,next){
 	}
     else {
       //context.name = authenticator.getUserName(req.session.user.login);
-	res.render('success', req.session.user);  
+	res.render('success', req.session.user);
     }
-	
+
   });
-  
-//signin---------------------------------------------------	
-//signin Page	
+
+//signin---------------------------------------------------
+//signin Page
 app.get('/signin',function(req,res,next){
 		res.render('signin');
-  });	
-	
+  });
+
 //signin Request
 app.post('/signin',function(req,res,next){
 		req.session.user = authenticator.getID(req.body.login, req.body.pw);
@@ -55,13 +55,13 @@ app.post('/signin',function(req,res,next){
         console.log(req.session.user);
         res.render('success', req.session.user)
         }
-  });	
-  
+  });
+
   //Create Page
   app.get('/signup',function(req,res,next){
 		res.render('signup');
-  });	
-  
+  });
+
   //Create Request
 app.post('/addUser',function(req,res,next){
 		req.session.user = authenticator.assignID(req.body.login, req.body.name, req.body.pw);
@@ -74,15 +74,15 @@ app.post('/addUser',function(req,res,next){
 		  res.render('success', req.session.user);
         }
   });
-  
- //Logout 
+
+ //Logout
     app.get('/logout',function(req,res,next){
 		req.session.user.login = 0;
         req.session.destroy();
 		res.render('home');
-  });	
-  
- //Change Password---------------------------------------------------	
+  });
+
+ //Change Password---------------------------------------------------
  //Change Password page
  //app.get('/resetPassword',function(req,res,next){
 //		res.render('changepassword');
@@ -97,8 +97,8 @@ app.post('/resetPassword',function(req,res,next){
 		authenticator.changePassword(req.session.user.login,req.body.oldPW,req.body.newPW);
 		res.render('success', req.session.user);
         }
-  });	  
-  
+  });
+
   //View Issues-----------------------------------------------------
   //MY Issues page
  app.get('/userissues',function(req,res,next){
@@ -106,13 +106,13 @@ app.post('/resetPassword',function(req,res,next){
 			res.render('signin');
 		}
         else {
-		context = router.getIssuesbyID(req.session.user.login);
-		res.render('myissues',context)
+			var context = router.getIssuesbyID(req.session.user.login);
+			res.render('myissues',context)
         }
-		
+
   });
-  
-  
+
+
   //Filtered Issues (filter can be NULL)
  app.post('/filter',function(req,res,next){
 		if (notloggedin(req)){
@@ -122,22 +122,43 @@ app.post('/resetPassword',function(req,res,next){
 		context = router.getIssueswFilter(req.session.user.login, req.body.filterParams);
 		res.render('myissues',context)
         }
-		
+
   });
-  
+
     //Change Issues-----------------------------------------------------
-  //Add New Issue
+		//Get report form page
+		app.get('/addissue',function(req,res,next){
+			if (notloggedin(req)){
+				res.render('signin');
+			}
+	     else  {
+	    //     req.session.user={ login: 'doddc', name: 'doddco2', pw: 't' }
+			// router.addIssue(req.session.user.login, req.body);
+			// context = router.getIssuesbyID(req.session.user.login);
+			res.render('issueform', req.session.user);
+	     }
+	  });
+		//Redirect Home after successful report submission
+		app.get('/redirecthome',function(req,res,next){
+			if (notloggedin(req)){
+				res.render('signin');
+			} else  {
+			res.render('success', req.session.user);
+	     }
+	  });
+  //Submit New Issue
   app.post('/addissue',function(req,res,next){
 		if (notloggedin(req)){
 			res.render('signin');
 		}
      else  {
-        req.session.user={ login: 'doddc', name: 'doddco2', pw: 't' }
+        //req.session.user={ login: 'doddc', name: 'doddco2', pw: 't' }
 		router.addIssue(req.session.user.login, req.body);
-		context = router.getIssuesbyID(req.session.user.login);
-		res.render('myissues',context)	
+		//context = router.getIssuesbyID(req.session.user.login);
+		var context = req.body;
+		res.render('issuesuccess', context);
      }
-  }); 
+  });
 
   //Update Issue
   app.post('/updateissue',function(req,res,next){
@@ -147,10 +168,10 @@ app.post('/resetPassword',function(req,res,next){
       else {
 		router.updateIssue(req.session.user.login, req.body);
 		context = router.getIssuesbyID(req.session.user.login);
-		res.render('myissues',context)	
+		res.render('myissues',context)
       }
-  }); 
-  
+  });
+
 	//Resolve Issue
     app.post('/resolveissue',function(req,res,next){
 		if (notloggedin(req)){
@@ -159,9 +180,9 @@ app.post('/resetPassword',function(req,res,next){
         else {
 		router.resolveIssue(req.session.user.login, req.body);
 		context = router.getIssuesbyID(req.session.user.login);
-		res.render('myissues',context)	
+		res.render('myissues',context)
         }
-  }); 
+  });
 
 
 //Not found and Error handling (from activity)
