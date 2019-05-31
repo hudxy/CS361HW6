@@ -5,6 +5,7 @@
         <h1>My Issuses</h1>
 
         {{#each this}}
+        {{#if category}}
         <h3>Issue ID: {{id}}</h3>
         Category: {{category}}<br>
         Urgency: {{urgency}}<br>
@@ -13,6 +14,7 @@
         State: {{state}}<br>
         Zipcode: {{zipcode}}<br>
         Description: {{description}}<br>
+        {{/if}}
         {{/each}}
 
 
