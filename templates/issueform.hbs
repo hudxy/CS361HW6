@@ -1,9 +1,102 @@
 <html>
     <head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Submit an Issue</h1>
-        <form action="/addissue" method="post">
+        <h1 style="margin:0,auto; text-align:center; border:2px solid black;">Submit an Issue</h1><br/>
+        <div class="container" style="background:lightblue;">
+          <div class="row">
+            <div class="col text-center">
+              <br/><button id = "find-me"type="button" class="btn btn-primary" style="text-align: center;">Find My Location!</button><br/><br/>
+              <p id = "status"></p>
+              <a id = "map-link" target="_blank"></a>
+              <p id = "converted-link"></p>
+
+              <form action="/addissue" method="post">
+
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Category</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="category" required>
+                      <option selected>Choose...</option>
+                      <option value="Roads">Roads</option>
+                      <option value="Electricity">Electricity</option>
+                      <option value="NaturalGas">Natural Gas</option>
+                      <option value="CommunicationNetworks">Communication Networks</option>
+                      <option value="Schools">Schools</option>
+                      <option value="Airports">Airports</option>
+                      <option value="Rail">Rail</option>
+                      <option value="Water">Water</option>
+                      <option value="Wastewater">Wastewater</option>
+                      <option value="Parks">Parks</option>
+                      <option value="Levees">Levees</option>
+                      <option value="Dams">Dams</option>
+                      <option value="Waterways">Waterways</option>
+                      <option value="InlandPorts">Inland Ports</option>
+                      <option value="SolidWaste">Solid Waste</option>
+                      <option value="HazardousSolidWaste">Hazardous Solid Waste</option>
+                    </select>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Urgency Level</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="urgency" required>
+                      <option selected>Choose...</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">City</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="city">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">State</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="state">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Zip Code</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="zipcode">
+                  </div>
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Description</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" name="description"></textarea><br /><br />
+                  </div>
+                  <br/><button type="button" class="btn btn-primary btn-block" style="text-align: center;" value="Report">Report</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <!-- <button id = "find-me"type="button" class="btn btn-primary" style="text-align: center;">Find My Location!</button><br/>
+        <p id = "status"></p>
+        <a id = "map-link" target="_blank"></a>
+        <p id = "converted-link"></p>
+        <br />
+        <br /> -->
+
+        <!-- <form action="/addissue" method="post">
 
             <h3>Category:</h3>
             <select name="category" required>
@@ -40,6 +133,44 @@
             <textarea rows="20" cols="50" name="description">
             </textarea><br>
             <input type="submit" value="Report">
-        </form>
+        </form> -->
+
+        <script>
+        function geoFindMe() {
+
+          const status = document.querySelector('#status');
+          const mapLink = document.querySelector('#map-link');
+
+          mapLink.href = '';
+          mapLink.textContent = '';
+
+          function success(position) {
+            const latitude  = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            status.textContent = '';
+            mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+            mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+          }
+
+          function error() {
+            status.textContent = 'Unable to retrieve your location';
+          }
+
+          if (!navigator.geolocation) {
+            status.textContent = 'Geolocation is not supported by your browser';
+          } else {
+            status.textContent = 'Locating…';
+            navigator.geolocation.getCurrentPosition(success, error);
+          }
+
+        }
+
+        document.querySelector('#find-me').addEventListener('click', geoFindMe);
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
