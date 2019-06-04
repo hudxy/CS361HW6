@@ -27,8 +27,22 @@ var router = {
 
                 return retIssues;
 			},
-            getIssueswFilter:function (user,filter) {
+            getIssueswFilter:function (user, categories) {
                 //Returns issues that satisfy the parameters set in filter
+                let hashmap = {};
+                console.log('categories', categories)
+                for (let i = 0; i < categories.length; i++) {
+                    hashmap[categories[i]] = true;
+                }
+                let allIssues = this.getIssuesbyID(user);
+                let filteredIssues = [];
+                allIssues.forEach((issue) => {
+                    if (hashmap[issue.category] === true) {
+                        filteredIssues.push(issue)
+                    }
+                })
+                return filteredIssues
+                
             },
             addIssue:function (user,issue) {
                 //Create new Issue Ticket with issue data

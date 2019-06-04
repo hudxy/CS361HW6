@@ -106,8 +106,8 @@ app.post('/resetPassword',function(req,res,next){
 			res.render('signin');
 		}
         else {
-			var context = router.getIssuesbyID(req.session.user.login);
-			res.render('myissues',context)
+					var context = router.getIssuesbyID(req.session.user.login);
+					res.render('myissues', context)
         }
 
   });
@@ -118,10 +118,19 @@ app.post('/resetPassword',function(req,res,next){
 		if (notloggedin(req)){
 			res.render('signin');
 		}
-        else {
-		context = router.getIssueswFilter(req.session.user.login, req.body.filterParams);
-		res.render('myissues',context)
-        }
+    else {
+			console.log("req.body.category", typeof(req.body.category))
+			let categoryArr;
+			if (typeof(req.body.category) === 'string') {
+				categoryArr = [req.body.category]
+			}
+			else {
+				categoryArr = req.body.category
+
+			}
+			context = router.getIssueswFilter(req.session.user.login, categoryArr);
+			res.render('myissues',context)
+    }
 
   });
 
