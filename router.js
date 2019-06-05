@@ -47,7 +47,7 @@ var router = {
                 for (let i = 0; i < categories.length; i++) {
                     hashmap[categories[i]] = true;
                 }
-                let allIssues = this.getIssuesbyID(user);
+                let allIssues = this.getIssuesbyUser(user);
                 let filteredIssues = [];
                 allIssues.forEach((issue) => {
                     if (hashmap[issue.category] === true) {
