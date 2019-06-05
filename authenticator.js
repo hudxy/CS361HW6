@@ -67,6 +67,44 @@ var auth = {
 						fs.writeFileSync('db.json', JSON.stringify(users))
 					}
 				})
+            },
+            getWatchlist:function (userName) { 
+                const dataBuffer = fs.readFileSync("watchdb.json")
+				const dataJSON = dataBuffer.toString()
+				const issues = JSON.parse(dataJSON)
+                retIssues = {}
+				issues.forEach((issue) => {
+				if (issue.user === userName) {
+                        if (retIssues = {}){
+                            retIssues = router.getIssuesbyID(issue.id)
+                            }
+                        else {
+                            retIssues.push(router.getIssuesbyID(issue.id))
+                        }
+					}
+				})
+                return retIssues; 
+            },
+            addWatchlist:function (userName,issueId) { 
+                 //Create new Issue Ticket with issue data
+				const dataBuffer = fs.readFileSync("watchdb.json")
+				const dataJSON = dataBuffer.toString()
+				let watchlist = JSON.parse(dataJSON)
+				watchlist.push({user: userName,id: issueId})
+				fs.writeFileSync('watchdb.json', JSON.stringify(watchlist))
+            },
+            removeWatchlist:function (userName,issueId) { 
+                const dataBuffer = fs.readFileSync("watchdb.json")
+				const dataJSON = dataBuffer.toString()
+				const watchlist = JSON.parse(dataJSON)
+                row=0
+				watchlist.forEach((issue) => {
+				if (issue.user == userName && issue.id == issueId) {
+                        watchlist.splice(row,1)
+					}
+                    row++
+				})
+                fs.writeFileSync('watchdb.json', JSON.stringify(watchlist))
             }
     };
 

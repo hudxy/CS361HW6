@@ -106,7 +106,7 @@ app.post('/resetPassword',function(req,res,next){
 			res.render('signin');
 		}
         else {
-					var context = router.getIssuesbyID(req.session.user.login);
+					var context = router.getIssuesbyUser(req.session.user.login);
 					res.render('myissues', context)
         }
 
@@ -143,7 +143,7 @@ app.post('/resetPassword',function(req,res,next){
 	     else  {
 	    //     req.session.user={ login: 'doddc', name: 'doddco2', pw: 't' }
 			// router.addIssue(req.session.user.login, req.body);
-			// context = router.getIssuesbyID(req.session.user.login);
+			// context = router.getIssuesbyUser(req.session.user.login);
 			res.render('issueform', req.session.user);
 	     }
 	  });
@@ -163,7 +163,7 @@ app.post('/resetPassword',function(req,res,next){
      else  {
         //req.session.user={ login: 'doddc', name: 'doddco2', pw: 't' }
 		router.addIssue(req.session.user.login, req.body);
-		//context = router.getIssuesbyID(req.session.user.login);
+		//context = router.getIssuesbyUser(req.session.user.login);
 		var context = req.body;
 		res.render('issuesuccess', context);
      }
@@ -176,7 +176,7 @@ app.post('/resetPassword',function(req,res,next){
 		}
       else {
 		router.updateIssue(req.session.user.login, req.body);
-		context = router.getIssuesbyID(req.session.user.login);
+		context = router.getIssuesbyUser(req.session.user.login);
 		res.render('myissues',context)
       }
   });
@@ -188,11 +188,47 @@ app.post('/resetPassword',function(req,res,next){
 		}
         else {
 		router.resolveIssue(req.session.user.login, req.body);
-		context = router.getIssuesbyID(req.session.user.login);
+		context = router.getIssuesbyUser(req.session.user.login);
 		res.render('myissues',context)
         }
   });
 
+ //Watchlist-----------------------------------------------------
+
+  //MY Issues page
+ app.get('/watchlist',function(req,res,next){
+		if (notloggedin(req)){
+			res.render('signin');
+		}
+        else {
+		context = authenticator.getWatchlist(req.session.user.login);
+		res.render('watchlist',context)
+        }	
+  });
+  
+
+app.post('/addwatch',function(req,res,next){
+		if (notloggedin(req)){
+			res.render('signin');
+		}
+        else {
+        console.log(req.session.user.login, req.body.id)  
+        authenticator.addWatchlist(req.session.user.login, req.body.id);    
+		context = authenticator.getWatchlist(req.session.user.login);
+		  res.render('watchlist', req.session.user);
+        }
+  });
+
+app.post('/removewatch',function(req,res,next){
+		if (notloggedin(req)){
+			res.render('signin');
+		}
+        else {
+        authenticator.removeWatchlist(req.session.user.login, req.body.id);    
+		context = authenticator.getWatchlist(req.session.user.login);
+		  res.render('watchlist', req.session.user);
+        }
+  });
 
 //Not found and Error handling (from activity)
 app.use(function(req,res){

@@ -1,6 +1,19 @@
 var fs = require('fs');
 var router = {
-            getIssuesbyID:function (user) {
+            getIssuesbyID:function (id) { 
+                //Returns issues tied to a User ID 
+                const dataBuffer = fs.readFileSync("issuedb.json")
+				const dataJSON = dataBuffer.toString()
+				const issues = JSON.parse(dataJSON)
+                retIssues = {}
+				issues.forEach((issue) => {
+				if (issue.id === id) {
+                        retIssues = issue
+					}
+				})
+                return retIssues; 
+			},
+            getIssuesbyUser:function (user) {
                 //Returns issues tied to a User ID
                 const dataBuffer = fs.readFileSync("issuedb.json");
 				const dataJSON = dataBuffer.toString()
