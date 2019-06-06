@@ -209,7 +209,25 @@ app.post('/resetPassword',function(req,res,next){
 			res.render('signin')
 		}
     else {
-			context = authenticator.getWatchlist(req.session.user.login)
+			context = authenticator.getWatchlist(req.session.user.login,{})
+			res.render('watchlist', context)
+    }
+  })
+
+ app.post('/filteredwatchlist',function(req,res,next){
+		if (notloggedin(req)){
+			res.render('signin')
+		}
+    else {
+            let categoryArr
+			if (typeof(req.body.category) === 'string') {
+				categoryArr = [req.body.category]
+			}
+			else {
+				categoryArr = req.body.category
+
+			}
+			context = authenticator.getWatchlist(req.session.user.login,categoryArr)
 			res.render('watchlist', context)
     }
   })
