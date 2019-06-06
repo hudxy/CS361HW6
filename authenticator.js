@@ -1,6 +1,8 @@
 var fs = require('fs');
+var router = require('./router');
+
 var auth = {
-            getID: function (login,pw) { 
+            getID: function (login,pw) {
                 console.log(login, pw);
                 //Returns User ID if U/N and Password Correct, return 0 otherwise
 				//User ID should be a random number+an indicator of user permissions (ultility,admin,basic)
@@ -22,18 +24,18 @@ var auth = {
                     return currentUser;
                 }
                 else {
-                   return 0; 
+                   return 0;
                 }
             },
-            getUserName:function (userID) { 
-                //Returns name of User associated with ID. 
+            getUserName:function (userID) {
+                //Returns name of User associated with ID.
 				return 'test';
             },
-			assignID:function (newlogin, newName, newPW) { 
-                //Returns name of User associated with ID. 
+			assignID:function (newlogin, newName, newPW) {
+                //Returns name of User associated with ID.
                 //console.log(newlogin, newName, newPW);
 				const newUser = {login: newlogin, name: newName, pw: newPW}
-    
+
 				// load users
 				const dataBuffer = fs.readFileSync("db.json")
 				const dataJSON = dataBuffer.toString()
@@ -44,10 +46,10 @@ var auth = {
 
 				// save users
 				fs.writeFileSync('db.json', JSON.stringify(currUsers))
-				
+
 				return newUser;
             },
-            changePassword:function (userName,oldPW,newPW) { 
+            changePassword:function (userName,oldPW,newPW) {
 					//Updates password in database
 					// load db and see if user exists
                 console.log(userName,oldPW,newPW);
@@ -68,24 +70,20 @@ var auth = {
 					}
 				})
             },
-            getWatchlist:function (userName) { 
+            getWatchlist:function (userName) {
                 const dataBuffer = fs.readFileSync("watchdb.json")
 				const dataJSON = dataBuffer.toString()
 				const issues = JSON.parse(dataJSON)
-                retIssues = {}
+              var  retIssues = [];
 				issues.forEach((issue) => {
 				if (issue.user === userName) {
-                        if (retIssues = {}){
-                            retIssues = router.getIssuesbyID(issue.id)
-                            }
-                        else {
-                            retIssues.push(router.getIssuesbyID(issue.id))
-                        }
+                         var thisIssue = router.getIssuesbyID(issue.id);
+                         retIssues.push(thisIssue);
 					}
 				})
-                return retIssues; 
+                return retIssues;
             },
-            addWatchlist:function (userName,issueId) { 
+            addWatchlist:function (userName,issueId) {
                  //Create new Issue Ticket with issue data
 				const dataBuffer = fs.readFileSync("watchdb.json")
 				const dataJSON = dataBuffer.toString()
@@ -93,11 +91,11 @@ var auth = {
 				watchlist.push({user: userName,id: issueId})
 				fs.writeFileSync('watchdb.json', JSON.stringify(watchlist))
             },
-            removeWatchlist:function (userName,issueId) { 
+            removeWatchlist:function (userName,issueId) {
                 const dataBuffer = fs.readFileSync("watchdb.json")
 				const dataJSON = dataBuffer.toString()
 				const watchlist = JSON.parse(dataJSON)
-                row=0
+              var  row=0
 				watchlist.forEach((issue) => {
 				if (issue.user == userName && issue.id == issueId) {
                         watchlist.splice(row,1)

@@ -1,18 +1,30 @@
 var fs = require('fs');
 var router = {
-            getIssuesbyID:function (id) { 
-                //Returns issues tied to a User ID 
+            getIssuesbyID:function (id) {
+                //Returns issues tied to a User ID
                 const dataBuffer = fs.readFileSync("issuedb.json")
 				const dataJSON = dataBuffer.toString()
 				const issues = JSON.parse(dataJSON)
-                retIssues = {}
+            var retIssues = {}
 				issues.forEach((issue) => {
 				if (issue.id === id) {
-                        retIssues = issue
+                        retIssues = issue;
 					}
 				})
-                return retIssues; 
+                return retIssues;
 			},
+      getIssuesAll:function () {
+          //Returns all issues in issue database
+          const dataBuffer = fs.readFileSync("issuedb.json")
+  const dataJSON = dataBuffer.toString()
+  const issues = JSON.parse(dataJSON)
+          retIssues = [];
+  issues.forEach((issue) => {
+    retIssues.push(issue);
+
+  });
+          return retIssues;
+},
             getIssuesbyUser:function (user) {
                 //Returns issues tied to a User ID
                 const dataBuffer = fs.readFileSync("issuedb.json");
@@ -20,10 +32,10 @@ var router = {
         //console.log(dataJSON);
 				const issues = JSON.parse(dataJSON)
                 var retIssues = [];
-                console.log(typeof retIssues)
+                //console.log(typeof retIssues)
 				issues.forEach((issue) => {
 				if (issue.submitter === user) {
-                      console.log(typeof issue)
+                      //console.log(typeof issue)
                       retIssues.push(issue);
                       //Original code from cloned copy
                         // if (retIssues = {}){
@@ -47,7 +59,7 @@ var router = {
                 for (let i = 0; i < categories.length; i++) {
                     hashmap[categories[i]] = true;
                 }
-                let allIssues = this.getIssuesbyID(user);
+                let allIssues = this.getIssuesbyUser(user);
                 let filteredIssues = [];
                 allIssues.forEach((issue) => {
                     if (hashmap[issue.category] === true) {
@@ -55,13 +67,14 @@ var router = {
                     }
                 })
                 return filteredIssues
-                
+
             },
             addIssue:function (user,issue) {
                 //Create new Issue Ticket with issue data
-                 issue= {city: issue.city, state: issue.state, zipcode: issue.zipcode, category: issue.category, urgency: issue.urgency, description: issue.description, submitter: user, id: Math.round(Math.random()*1000000)}
+                  var randNum = Math.round(Math.random()*1000000)
+                  var strRandNum = randNum.toString()
+                 issue= {city: issue.city, state: issue.state, zipcode: issue.zipcode, category: issue.category, urgency: issue.urgency, description: issue.description, submitter: user, id: strRandNum}
 
-        //Original code from cloned copy
 				const dataBuffer = fs.readFileSync("issuedb.json")
   				const dataJSON = dataBuffer.toString()
   				let currIssues = JSON.parse(dataJSON)

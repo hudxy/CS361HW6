@@ -193,6 +193,16 @@ app.post('/resetPassword',function(req,res,next){
         }
   });
 
+	//View other issues
+	app.get('/otherissues',function(req,res,next){
+		if (notloggedin(req)){
+			res.render('signin');
+		}
+		 else  {
+		context = router.getIssuesAll();
+		res.render('otherissues', context);
+		 }
+	});
  //Watchlist-----------------------------------------------------
 
   //MY Issues page
@@ -203,19 +213,19 @@ app.post('/resetPassword',function(req,res,next){
         else {
 		context = authenticator.getWatchlist(req.session.user.login);
 		res.render('watchlist',context)
-        }	
+        }
   });
-  
+
 
 app.post('/addwatch',function(req,res,next){
 		if (notloggedin(req)){
 			res.render('signin');
 		}
         else {
-        console.log(req.session.user.login, req.body.id)  
-        authenticator.addWatchlist(req.session.user.login, req.body.id);    
-		context = authenticator.getWatchlist(req.session.user.login);
-		  res.render('watchlist', req.session.user);
+        console.log(req.session.user.login, req.body.id)
+        authenticator.addWatchlist(req.session.user.login, req.body.id);
+		//context = authenticator.getWatchlist(req.session.user.login);
+		  res.redirect('/watchlist');
         }
   });
 
@@ -224,9 +234,9 @@ app.post('/removewatch',function(req,res,next){
 			res.render('signin');
 		}
         else {
-        authenticator.removeWatchlist(req.session.user.login, req.body.id);    
-		context = authenticator.getWatchlist(req.session.user.login);
-		  res.render('watchlist', req.session.user);
+        authenticator.removeWatchlist(req.session.user.login, req.body.id);
+		//context = authenticator.getWatchlist(req.session.user.login);
+		res.redirect('/watchlist');
         }
   });
 
