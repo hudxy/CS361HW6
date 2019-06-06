@@ -5,7 +5,7 @@ var router = {
                 const dataBuffer = fs.readFileSync("issuedb.json")
 				const dataJSON = dataBuffer.toString()
 				const issues = JSON.parse(dataJSON)
-            var retIssues = {}
+                var retIssues = {}
 				issues.forEach((issue) => {
 				if (issue.id === id) {
                         retIssues = issue;
@@ -13,43 +13,32 @@ var router = {
 				})
                 return retIssues;
 			},
-      getIssuesAll:function () {
-          //Returns all issues in issue database
-          const dataBuffer = fs.readFileSync("issuedb.json")
-  const dataJSON = dataBuffer.toString()
-  const issues = JSON.parse(dataJSON)
-          retIssues = [];
-  issues.forEach((issue) => {
-    retIssues.push(issue);
+            getIssuesAll:function () {
+                //Returns all issues in issue database
+                    const dataBuffer = fs.readFileSync("issuedb.json")
+                    const dataJSON = dataBuffer.toString()
+                    const issues = JSON.parse(dataJSON)
+                    retIssues = [];
+                    issues.forEach((issue) => {
+                        retIssues.push(issue);
 
-  });
-          return retIssues;
-},
+                })
+                return retIssues;
+            },
             getIssuesbyUser:function (user) {
                 //Returns issues tied to a User ID
-                const dataBuffer = fs.readFileSync("issuedb.json");
+                const dataBuffer = fs.readFileSync("issuedb.json")
 				const dataJSON = dataBuffer.toString()
-        //console.log(dataJSON);
+                //console.log(dataJSON);
 				const issues = JSON.parse(dataJSON)
-                var retIssues = [];
+                var retIssues = []
                 //console.log(typeof retIssues)
 				issues.forEach((issue) => {
-				if (issue.submitter === user) {
-                      //console.log(typeof issue)
-                      retIssues.push(issue);
-                      //Original code from cloned copy
-                        // if (retIssues = {}){
-                        //     retIssues = issue;
-                        //     //console.log(issue);
-                        //     }
-                        // else {
-                        //     retIssues.push(issue);
-                        //     //console.log(issue);
-                        //
-                        // }
-					}
-				});
-
+                    if (issue.submitter === user) {
+                        //console.log(typeof issue)
+                        retIssues.push(issue)
+                    }
+                })
                 return retIssues;
 			},
             getIssueswFilter:function (user, categories) {
@@ -71,9 +60,9 @@ var router = {
             },
             addIssue:function (user,issue) {
                 //Create new Issue Ticket with issue data
-                  var randNum = Math.round(Math.random()*1000000)
-                  var strRandNum = randNum.toString()
-                 issue= {city: issue.city, state: issue.state, zipcode: issue.zipcode, category: issue.category, urgency: issue.urgency, description: issue.description, submitter: user, id: strRandNum}
+                var randNum = Math.round(Math.random()*1000000)
+                var strRandNum = randNum.toString()
+                issue = {city: issue.city, state: issue.state, zipcode: issue.zipcode, category: issue.category, urgency: issue.urgency, description: issue.description, submitter: user, id: strRandNum}
 
 				const dataBuffer = fs.readFileSync("issuedb.json")
   				const dataJSON = dataBuffer.toString()
@@ -88,6 +77,6 @@ var router = {
 			resolveIssue:function (user,issue) {
                 //Resolve Issue ticket
             }
-    };
+        };
 
 module.exports = router

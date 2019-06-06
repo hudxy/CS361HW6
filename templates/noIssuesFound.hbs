@@ -15,12 +15,12 @@
             </div>
         </nav><br/>
 
-        <h1 style="margin:0,auto; text-align:center; border:2px solid black;">Watchlist</h1><br/>
+        <h1 style="margin:0,auto; text-align:center; border:2px solid black;">My Issues</h1><br/>
 
         <div class="container" style="background:lightblue; padding: 15px;">
           <div class="row">
               <div class="col text-center">
-                <form action="/watchlist" method="post">
+                <form action="/filter" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Filter by Category</label>
@@ -47,26 +47,11 @@
                     </div>
                     <input type="submit" value="Filter">
                 </form>
+                    <p>No Issues Found!</p>
                 </div>
             </div>
         </div>
         <br />
         <br />
-        {{#each this}}
-            {{#if category}}
-            <h3>Issue ID: {{id}}</h3>
-            Submitter: {{submitter}}<br>
-            Category: {{category}}<br>
-            Urgency: {{urgency}}<br>
-
-            City: {{city}}<br>
-            State: {{state}}<br>
-            Zipcode: {{zipcode}}<br>
-            Description: {{description}}<br>
-            <form action="/removewatch" method="post">
-              <button type="submit" name="id" value="{{id}}">Remove from Watchlist</button>
-            </form>
-            {{/if}}
-            {{/each}}
     </body>
 </html>
