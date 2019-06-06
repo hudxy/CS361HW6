@@ -1,6 +1,9 @@
 var fs = require('fs');
 var router = require('./router');
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a2caaa38e7c13120321976fc031e3ff203af0b1
 var auth = {
             getID: function (login,pw) {
                 console.log(login, pw);
