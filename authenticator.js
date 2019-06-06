@@ -1,9 +1,7 @@
-var fs = require('fs');
-var router = require('./router');
-
+var fs = require('fs')
+var router = require('./router')
 var auth = {
             getID: function (login,pw) {
-                console.log(login, pw);
                 //Returns User ID if U/N and Password Correct, return 0 otherwise
 				//User ID should be a random number+an indicator of user permissions (ultility,admin,basic)
 				 // load db and see if user exists
@@ -13,27 +11,24 @@ var auth = {
 				let currentUser = {}
 				let success = false
 				users.forEach((user) => {
-					console.log(user.login, user.pw)
 					if (user.login === login && user.pw === pw) {
 						success = true
-                        //console.log('success')
 						currentUser = user
 					}
 				})
                 if (success){
-                    return currentUser;
+                    return currentUser
                 }
                 else {
-                   return 0;
+                   return 0
                 }
             },
             getUserName:function (userID) {
                 //Returns name of User associated with ID.
-				return 'test';
+				return 'test'
             },
 			assignID:function (newlogin, newName, newPW) {
                 //Returns name of User associated with ID.
-                //console.log(newlogin, newName, newPW);
 				const newUser = {login: newlogin, name: newName, pw: newPW}
 
 				// load users
@@ -47,20 +42,18 @@ var auth = {
 				// save users
 				fs.writeFileSync('db.json', JSON.stringify(currUsers))
 
-				return newUser;
+				return newUser
             },
             changePassword:function (userName,oldPW,newPW) {
 					//Updates password in database
 					// load db and see if user exists
-                console.log(userName,oldPW,newPW);
 				const dataBuffer = fs.readFileSync("db.json")
 				const dataJSON = dataBuffer.toString()
 				const users = JSON.parse(dataJSON)
 				let currentUser = {}
 				let success = false
 				users.forEach((user) => {
-				console.log(user.login, user.pw)
-				if (user.login === userName && user.pw === oldPW) {
+					if (user.login === userName && user.pw === oldPW) {
 						success = true
 						currentUser = user
 						user.pw = newPW
@@ -69,19 +62,24 @@ var auth = {
 						fs.writeFileSync('db.json', JSON.stringify(users))
 					}
 				})
-            },
+				if (success === true) {
+					return true
+				}
+				// No matching passwords!
+				return false
+			},
             getWatchlist:function (userName) {
                 const dataBuffer = fs.readFileSync("watchdb.json")
 				const dataJSON = dataBuffer.toString()
 				const issues = JSON.parse(dataJSON)
-              var  retIssues = [];
+              	var  retIssues = []
 				issues.forEach((issue) => {
-				if (issue.user === userName) {
-                         var thisIssue = router.getIssuesbyID(issue.id);
-                         retIssues.push(thisIssue);
+					if (issue.user === userName) {
+						var thisIssue = router.getIssuesbyID(issue.id)
+						retIssues.push(thisIssue)
 					}
 				})
-                return retIssues;
+                return retIssues
             },
             addWatchlist:function (userName,issueId) {
                  //Create new Issue Ticket with issue data
@@ -95,15 +93,15 @@ var auth = {
                 const dataBuffer = fs.readFileSync("watchdb.json")
 				const dataJSON = dataBuffer.toString()
 				const watchlist = JSON.parse(dataJSON)
-              var  row=0
+              	var  row=0
 				watchlist.forEach((issue) => {
-				if (issue.user == userName && issue.id == issueId) {
+					if (issue.user == userName && issue.id == issueId) {
                         watchlist.splice(row,1)
 					}
                     row++
 				})
                 fs.writeFileSync('watchdb.json', JSON.stringify(watchlist))
             }
-    };
+    	}
 
 module.exports = auth
