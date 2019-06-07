@@ -17,39 +17,6 @@
 
         <h1 style="margin:0,auto; text-align:center; border:2px solid black;">Other Open Issues</h1><br/>
 
-        <div class="container" style="background:lightblue; padding: 15px;">
-          <div class="row">
-              <div class="col text-center">
-                <form action="/filter" method="post">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Filter by Category</label>
-                        </div>
-                        <select class="custom-select" id="inputGroupSelect01" name="category" required multiple>
-                        <option selected>Choose...</option>
-                        <option value="Roads">Roads</option>
-                        <option value="Electricity">Electricity</option>
-                        <option value="NaturalGas">Natural Gas</option>
-                        <option value="CommunicationNetworks">Communication Networks</option>
-                        <option value="Schools">Schools</option>
-                        <option value="Airports">Airports</option>
-                        <option value="Rail">Rail</option>
-                        <option value="Water">Water</option>
-                        <option value="Wastewater">Wastewater</option>
-                        <option value="Parks">Parks</option>
-                        <option value="Levees">Levees</option>
-                        <option value="Dams">Dams</option>
-                        <option value="Waterways">Waterways</option>
-                        <option value="InlandPorts">Inland Ports</option>
-                        <option value="SolidWaste">Solid Waste</option>
-                        <option value="HazardousSolidWaste">Hazardous Solid Waste</option>
-                        </select>
-                    </div>
-                    <input type="submit" value="Filter">
-                </form>
-                </div>
-            </div>
-        </div>
         <br />
         <br />
         {{#each this}}
