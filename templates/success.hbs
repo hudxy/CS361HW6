@@ -41,15 +41,18 @@
               <a class="btn btn-danger btn-lg btn-block" onclick="updatePassword()">Reset Password</a><br>
               <a class="btn btn-primary btn-lg btn-block" href="/logout" style="text-decoration: none">Log Out</a><br><br>
 
-              <form id="pwReset" action="/resetPassword" method="post" style="display: none">
-                  Current Password:<br>
-                  <input type="password" name="oldPW"><br>
-                  New Password:<br>
-                  <input type="password" name="newPW"><br><br>
-                  <input type="text" name="userName" value="{{login}}" style="display:none">
-                  <br><br>
-                  <input type="submit" value="Reset">
-              </form>
+              <div class="container" style="background-color:darkturquoise; width:50%;"
+                <form id="pwReset" action="/resetPassword" method="post" style="display: none"><br />
+                    Current Password:<br>
+                    <input type="password" name="oldPW"><br>
+                    New Password:<br>
+                    <input type="password" name="newPW"><br><br>
+                    <input type="text" name="userName" value="{{login}}" style="display:none">
+                    <br>
+                    <input type="submit" value="Reset"> <br/> <br/>
+                </form>
+              </div>
+              <br />
             </div>
           </div>
         </div>
