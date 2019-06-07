@@ -28,28 +28,34 @@
 
 
 
-            <h1>Hello, {{name}}</h1>
+            <h1>Hello, {{name}}</h1><br />
             <!-- Add issue from sign in success -->
-            <button><a href="/addissue" style="text-decoration: none">Submit Issue</a></button><br><br>
-            <button><a href="/userissues" style="text-decoration: none">View My Issues</a></button><br><br>
-            <button><a href="/otherissues" style="text-decoration: none">View Other Issues</a></button><br><br>
-            <button><a href="/watchlist" style="text-decoration: none">Watchlist</a></button><br><br>
-            <button onclick="updatePassword()">Reset Password</button><br><br>
-            <button><a href="/logout" style="text-decoration: none">Log Out</a></button><br><br>
+            <div class="container" style="background-color:darkslategray;">
+              <br />
+              <div class="container">
+                <a class="btn btn-success btn-lg btn-block" href="/addissue" style="text-decoration: none">Submit Issue</a><br>
+                <a class="btn btn-success btn-lg btn-block" href="/userissues" style="text-decoration: none">View My Issues</a><br>
+                <a class="btn btn-success btn-lg btn-block" href="/otherissues" style="text-decoration: none">View Other Issues</a><br>
+                <a class="btn btn-success btn-lg btn-block" href="/watchlist" style="text-decoration: none">Watchlist</a><br><br><br /><br />
+              </div>
+              <a class="btn btn-danger btn-lg btn-block" onclick="updatePassword()">Reset Password</a><br>
+              <a class="btn btn-primary btn-lg btn-block" href="/logout" style="text-decoration: none">Log Out</a><br><br>
 
-            <form id="pwReset" action="/resetPassword" method="post" style="display: none">
-                Current Password:<br>
-                <input type="password" name="oldPW"><br>
-                New Password:<br>
-                <input type="password" name="newPW"><br><br>
-                <input type="text" name="userName" value="{{login}}" style="display:none">
-                <br><br>
-                <input type="submit" value="Reset">
-            </form>
+              <form id="pwReset" action="/resetPassword" method="post" style="display: none">
+                  Current Password:<br>
+                  <input type="password" name="oldPW"><br>
+                  New Password:<br>
+                  <input type="password" name="newPW"><br><br>
+                  <input type="text" name="userName" value="{{login}}" style="display:none">
+                  <br><br>
+                  <input type="submit" value="Reset">
+              </form>
+            </div>
           </div>
         </div>
       </div>
-
+      <br />
+      <br />
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
