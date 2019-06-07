@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs')
 let router = {
             getIssuesbyID:function (id) {
                 //Returns issues tied to a User ID
@@ -46,7 +46,7 @@ let router = {
                 let hashmap = {}
                 console.log('categories', categories)
                 for (let i = 0; i < categories.length; i++) {
-                    hashmap[categories[i]] = true;
+                  hashmap[categories[i]] = true
                 }
                 let allIssues = this.getIssuesbyUser(user)
                 let filteredIssues = []

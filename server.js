@@ -227,7 +227,7 @@ app.post('/resetPassword',function(req,res,next){
 				categoryArr = req.body.category
 
 			}
-			context = authenticator.getWatchlist(req.session.user.login,categoryArr)
+			context = authenticator.getWatchlistwFilter(req.session.user.login,categoryArr)
 			res.render('watchlist', context)
     }
   })

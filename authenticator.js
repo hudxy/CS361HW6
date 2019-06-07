@@ -68,10 +68,24 @@ var auth = {
 			// No matching passwords!
 			return false
 		},
-		getWatchlist:function (userName,categories) {
+		getWatchlist:function (userName) {
 			const dataBuffer = fs.readFileSync("watchdb.json")
 			const dataJSON = dataBuffer.toString()
 			const issues = JSON.parse(dataJSON)
+			var  retIssues = []
+			issues.forEach((issue) => {
+				if (issue.user === userName) {
+					var thisIssue = router.getIssuesbyID(issue.id)
+					retIssues.push(thisIssue)
+				}
+			})
+			return retIssues
+		},
+		getWatchlistwFilter:function (userName,categories) {
+			const dataBuffer = fs.readFileSync("watchdb.json")
+			const dataJSON = dataBuffer.toString()
+			const issues = JSON.parse(dataJSON)
+			let hashmap = {}
 			for (let i = 0; i < categories.length; i++) {
 				hashmap[categories[i]] = true
 			}
