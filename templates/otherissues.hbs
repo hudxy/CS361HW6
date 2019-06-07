@@ -2,9 +2,9 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
-    <body>
+    <body style="background-color:lightseagreen;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/" style="color:orange;">Infrastructure Maintenance and Reporting Tool</a>
+            <a class="navbar-brand" href="/" style="color:bisque;">IMR Tool</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -15,25 +15,39 @@
             </div>
         </nav><br/>
 
-        <h1 style="margin:0,auto; text-align:center; border:2px solid black;">Other Open Issues</h1><br/>
+        <h1 style="margin:0,auto; text-align:center; border:2px solid black; background-color:cyan">Other Open Issues</h1><br/>
 
         <br />
         <br />
+        <div class="card-deck">
         {{#each this}}
             {{#if category}}
-            <h3>Issue ID: {{id}}</h3>
-            Submitter: {{submitter}}<br>
-            Category: {{category}}<br>
-            Urgency: {{urgency}}<br>
 
-            City: {{city}}<br>
-            State: {{state}}<br>
-            Zipcode: {{zipcode}}<br>
-            Description: {{description}}<br>
-            <form action="/addwatch" method="post">
-              <button type="submit" name="id" value="{{id}}">Add to Watchlist</button>
-            </form>
+
+              <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Issue ID: {{id}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Submitter: {{submitter}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Category: {{category}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Urgency: {{urgency}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">City: {{city}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">State: {{state}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Zipcode: {{zipcode}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Description: {{description}}</h6>
+                  <form action="/addwatch" method="post">
+                    <button type="submit" class="btn btn-primary" name="id" value="{{id}}">Add to Watchlist</button>
+                  </form>
+                </div>
+              </div>
+
+
+
             {{/if}}
-            {{/each}}
+          {{/each}}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
