@@ -1,5 +1,5 @@
-var fs = require('fs');
-var router = {
+const fs = require('fs');
+let router = {
             getIssuesbyID:function (id) {
                 //Returns issues tied to a User ID
                 const dataBuffer = fs.readFileSync("issuedb.json")
@@ -8,28 +8,28 @@ var router = {
                 var retIssues = {}
 				issues.forEach((issue) => {
 				if (issue.id === id) {
-                        retIssues = issue;
+                        retIssues = issue
 					}
 				})
-                return retIssues;
+                return retIssues
 			},
             getIssuesAll:function () {
                 //Returns all issues in issue database
                     const dataBuffer = fs.readFileSync("issuedb.json")
                     const dataJSON = dataBuffer.toString()
                     const issues = JSON.parse(dataJSON)
-                    retIssues = [];
+                    retIssues = []
                     issues.forEach((issue) => {
-                        retIssues.push(issue);
+                        retIssues.push(issue)
 
                 })
-                return retIssues;
+                return retIssues
             },
             getIssuesbyUser:function (user) {
                 //Returns issues tied to a User ID
                 const dataBuffer = fs.readFileSync("issuedb.json")
 				const dataJSON = dataBuffer.toString()
-                //console.log(dataJSON);
+                //console.log(dataJSON)
 				const issues = JSON.parse(dataJSON)
                 var retIssues = []
                 //console.log(typeof retIssues)
@@ -39,17 +39,17 @@ var router = {
                         retIssues.push(issue)
                     }
                 })
-                return retIssues;
+                return retIssues
 			},
             getIssueswFilter:function (user, categories) {
                 //Returns issues that satisfy the parameters set in filter
-                let hashmap = {};
+                let hashmap = {}
                 console.log('categories', categories)
                 for (let i = 0; i < categories.length; i++) {
                     hashmap[categories[i]] = true;
                 }
-                let allIssues = this.getIssuesbyUser(user);
-                let filteredIssues = [];
+                let allIssues = this.getIssuesbyUser(user)
+                let filteredIssues = []
                 allIssues.forEach((issue) => {
                     if (hashmap[issue.category] === true) {
                         filteredIssues.push(issue)
@@ -77,6 +77,6 @@ var router = {
 			resolveIssue:function (user,issue) {
                 //Resolve Issue ticket
             }
-        };
+        }
 
 module.exports = router

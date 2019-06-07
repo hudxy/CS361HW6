@@ -1,13 +1,13 @@
 
-var express = require('express')
-var bodyParser = require("body-parser")
-var session = require('express-session')
-var authenticator = require('./authenticator')
-var router = require('./router')
-var fs = require('fs')
+const express = require('express')
+const bodyParser = require("body-parser")
+const session = require('express-session')
+const authenticator = require('./authenticator')
+const router = require('./router')
+const fs = require('fs')
 const path = require('path')
 
-var app = express()
+let app = express()
 app.use(session({secret:'SuperSecretPassword'}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -104,7 +104,7 @@ app.post('/resetPassword',function(req,res,next){
 			res.render('signin')
 		}
         else {
-					var context = router.getIssuesbyUser(req.session.user.login)
+					let context = router.getIssuesbyUser(req.session.user.login)
 					res.render('myissues', context)
         }
 
@@ -162,7 +162,7 @@ app.post('/resetPassword',function(req,res,next){
         //req.session.user={ login: 'doddc', name: 'doddco2', pw: 't' }
 		router.addIssue(req.session.user.login, req.body)
 		//context = router.getIssuesbyUser(req.session.user.login)
-		var context = req.body
+		let context = req.body
 		res.render('issuesuccess', context)
      }
   })
