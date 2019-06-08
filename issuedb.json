@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-[{"city":"123","state":"123","zipcode":"123","category":"Roads","urgency":"2","description":"","submitter":"","id":"123123123"},{"city":"San Leandro","state":"CA","zipcode":"94579","category":"Electricity","urgency":"2","description":"1233","submitter":"","id":"344499"},{"city":"Chandler","state":"AZ","zipcode":"85226","category":"Roads","urgency":"1","description":"","submitter":"123","id":"374380"},{"city":"Ypsilanti","state":"MI","zipcode":"48197","category":"Roads","urgency":"5","description":"Potholes Everywhere along Washtenaw Ave between Golfside Rd and Carpenter Rd.","submitter":"Collin_username","id":"185271"}]
-=======
 [{"city":"123",
   "state":"123",
   "zipcode":"123",
@@ -25,4 +22,3 @@
       "description":"",
       "submitter":"123",
       "id":"374380"}]
->>>>>>> 0dbf1305e3881076299eba5b5a125dbac04579c0
