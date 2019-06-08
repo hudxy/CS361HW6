@@ -1,1 +1,16 @@
+<<<<<<< HEAD
 [{"login":"123","name":"abc","pw":"abc123"},{"login":"","name":"","pw":"123"},{"login":"my","name":"hi","pw":"name"},{"login":"cest3","name":"Conor","pw":"test"},{"login":"ctest2","name":"Conor","pw":"test"},{"login":"cododd","name":"Conor","pw":"test4"},{"login":"doddco","name":"doddco","pw":"test1"},{"login":"doddc","name":"doddc","pw":"t"},{"login":"doddc","name":"doddco2","pw":"t2"},{"login":"doddc","name":"doddco2","pw":"t"},{"login":"doddc","name":"doddco2","pw":"t"},{"login":"Frank","name":"Frank","pw":"123"},{"login":"kt","name":"Katie","pw":"kt"},{"login":"Collin_username","name":"Collin","pw":"Collin_password"}]
+=======
+[{"login":"123","name":"abc","pw":"abc123"},
+  {"login":"","name":"","pw":"123"},
+  {"login":"my","name":"hi","pw":"name"},
+  {"login":"cest3","name":"Conor","pw":"test"},
+  {"login":"ctest2","name":"Conor","pw":"test"},
+  {"login":"cododd","name":"Conor","pw":"test4"},
+  {"login":"doddco","name":"doddco","pw":"test1"},
+  {"login":"doddc","name":"doddc","pw":"t"},
+  {"login":"doddc","name":"doddco2","pw":"t2"},
+  {"login":"doddc","name":"doddco2","pw":"t"},
+  {"login":"doddc","name":"doddco2","pw":"t"},
+  {"login":"Frank","name":"Frank","pw":"123"}]
+>>>>>>> 0dbf1305e3881076299eba5b5a125dbac04579c0
